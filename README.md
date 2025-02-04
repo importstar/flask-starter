@@ -1,6 +1,8 @@
 # Setup and Installation
 ### 1. Run this command in root of project
 ```
+python3 -m venv venv
+source venv/bin/activate
 ./scripts/setup
 ```
 -  create python virtual env
