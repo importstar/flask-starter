@@ -1,0 +1,7 @@
+#!/bin/sh
+
+python3 -m venv venv
+source venv/bin/activate
+cp development.cfg.example development.cfg
+pip install poetry
+poetry install
