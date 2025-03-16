@@ -27,13 +27,13 @@ def get_program_options(default_host="127.0.0.1", default_port="8080"):
     parser.add_option(
         "-H",
         "--host",
-        help="Hostname of the Flask app " + "[default %s]" % default_host,
+        help="Hostname of the Flask app " + f"[default {default_host}]",
         default=default_host,
     )
     parser.add_option(
         "-P",
         "--port",
-        help="Port for the Flask app " + "[default %s]" % default_port,
+        help="Port for the Flask app " + f"[default {default_port}]",
         default=default_port,
     )
 

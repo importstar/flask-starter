@@ -1,14 +1,16 @@
-import pathlib
 import importlib
 import logging
+import pathlib
+
 from app.web.utils import template_filters
 
 logger = logging.getLogger(__name__)
 
+
 def get_subblueprints(directory):
     blueprints = []
 
-    package = directory.parts[len(pathlib.Path.cwd().parts):]
+    package = directory.parts[len(pathlib.Path.cwd().parts) :]
     parent_module = None
     try:
         pymod_file = f"{'.'.join(package)}"
@@ -23,7 +25,7 @@ def get_subblueprints(directory):
 
     subblueprints = []
     for module in directory.iterdir():
-        if "__" == module.name[:2]:
+        if module.name[:2] == "__":
             continue
 
         if module.match("*.py"):
@@ -46,6 +48,7 @@ def get_subblueprints(directory):
             blueprints.append(module)
 
     return blueprints
+
 
 def register_blueprint(app):
     app.add_template_filter(template_filters.static_url)
