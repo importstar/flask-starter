@@ -3,6 +3,7 @@ from flask import Flask
 from . import views
 from .. import models
 from .utils.error_handling import init_error_handling
+from .utils import acl
 
 app = Flask(__name__)
 
@@ -12,6 +13,7 @@ def create_app():
     app.config.from_object("app.default_settings")
     views.register_blueprint(app)
     models.init_db(app)
+    acl.init_acl(app)
     init_error_handling(app)
     return app
 

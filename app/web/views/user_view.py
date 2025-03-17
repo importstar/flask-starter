@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, request
-from ..forms.user_form import LoginForm
+from ..forms.user_form import LoginForm, RegisterForm
 from ...services.user_service import UserService
 
 module = Blueprint("users", __name__, url_prefix="/users")
@@ -8,7 +8,7 @@ module = Blueprint("users", __name__, url_prefix="/users")
 @module.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
-
+    error_msg = ""
     if not form.validate_on_submit():
         if "password" in form.errors:
             if "Field must be at least 6 characters long." in form.errors["password"]:
@@ -17,8 +17,6 @@ def login():
                 error_msg = "กรุณากรอกรหัสผ่าน"
             else:
                 error_msg = "เกิดข้อผิดพลาดในการป้อนรหัสผ่าน"
-        else:
-            error_msg = "เกิดข้อผิดพลาด กรุณาลองใหม่"
 
         return render_template("/users/login.html", form=form, error_msg=error_msg)
 
@@ -32,6 +30,17 @@ def login():
     return redirect(request.args.get("next", url_for("index.index")))
 
 
-@module.route("/register")
+@module.route("/register", methods=["get", "post"])
 def register():
-    return render_template("/users/register.html")
+    form = RegisterForm()
+
+    if not form.validate_on_submit():
+        return render_template("/users/register.html", form=form)
+
+    register_result = UserService.register(form)
+    if register_result["success"] is False:
+        return render_template(
+            "/users/register.html", form=form, error_msg=register_result["error_msg"]
+        )
+
+    return redirect(url_for("users.login"))

@@ -1,5 +1,6 @@
 from ..models.user_model import User
 from flask_login import login_user
+from ..web.forms.user_form import RegisterForm
 import datetime
 
 
@@ -22,5 +23,16 @@ class UserService:
         return {"error_msg": "", "success": True}
 
     @staticmethod
-    def register(username: str, password: str):
-        pass
+    def register(form: RegisterForm):
+        username = form.username.data
+        existing_user = User.objects(username=username).first()
+        if existing_user:
+            return {"success": False, "error_msg": "ชื่อผู้ใช้ซ้ำ"}
+        
+        if form.password.data != form.confirm_password.data:
+            return {"success": False, "error_msg": "รหัสผ่านไม่ตรงกัน"}
+        
+        user = User(username=username)
+        user.set_password(form.password.data)
+        user.save()
+        return {"success": True, "error_msg": ""}
