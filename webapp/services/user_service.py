@@ -28,10 +28,10 @@ class UserService:
         existing_user = User.objects(username=username).first()
         if existing_user:
             return {"success": False, "error_msg": "ชื่อผู้ใช้ซ้ำ"}
-        
+
         if form.password.data != form.confirm_password.data:
             return {"success": False, "error_msg": "รหัสผ่านไม่ตรงกัน"}
-        
+
         user = User(username=username)
         user.set_password(form.password.data)
         user.save()

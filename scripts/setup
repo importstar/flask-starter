@@ -1,5 +1,4 @@
 #!/bin/sh
 
-cp development.cfg.example development.cfg
-pip install poetry
+cp .env.sample .env
 poetry install

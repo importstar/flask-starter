@@ -2,7 +2,7 @@ import importlib
 import logging
 import pathlib
 
-from app.web.utils import template_filters
+from ..utils import template_filters
 
 logger = logging.getLogger(__name__)
 

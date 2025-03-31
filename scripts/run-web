@@ -1,5 +1,5 @@
 #!/bin/bash
 
 # Activate the virtual environment
-source ./venv/bin/activate
-APP_SETTINGS=$(pwd)/development.cfg run-web -d
+# source ./venv/bin/activate
+APP_SETTINGS=$(pwd)/.env poetry run run-web -d

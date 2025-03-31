@@ -1,19 +1,38 @@
+import os
 import optparse
 from flask import Flask
 from . import views
 from .. import models
 from .utils.error_handling import init_error_handling
 from .utils import acl
+from dotenv import load_dotenv
 
-app = Flask(__name__)
+
+def load_config(app):
+
+    app.config.from_object("webapp.default_settings")
+    app.config.from_envvar("APP_SETTINGS")
+    load_dotenv()
+
+    for k, v in os.environ.items():
+        if v in ["True", "TRUE", "False", "FALSE"]:
+            v = v.lower()
+
+        try:
+            app.config[k] = json.loads(v)
+        except Exception as e:
+            app.config[k] = v
 
 
 def create_app():
-    app.config.from_envvar("APP_SETTINGS")
-    app.config.from_object("app.default_settings")
+
+    app = Flask(__name__)
+    load_config(app)
+
     views.register_blueprint(app)
     models.init_db(app)
     acl.init_acl(app)
+
     init_error_handling(app)
     return app
 

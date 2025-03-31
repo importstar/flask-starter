@@ -1,4 +1,4 @@
-from . import create_app, get_program_options
+from webapp.web import create_app, get_program_options
 
 
 def main():
