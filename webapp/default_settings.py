@@ -1,1 +1,2 @@
-VERSION = "0.1.0"
+MONGODB_DB = "webappdb"
+APP_TITLE = "Flask App"

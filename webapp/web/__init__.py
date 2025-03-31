@@ -30,6 +30,7 @@ def create_app():
     load_config(app)
 
     views.register_blueprint(app)
+    views.init_htmx(app)
     models.init_db(app)
     acl.init_acl(app)
 

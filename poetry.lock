@@ -180,6 +180,21 @@ bcrypt = ">=3.1.1"
 Flask = "*"
 
 [[package]]
+name = "flask-htmx"
+version = "0.4.0"
+description = "A Flask extension to work with HTMX."
+optional = false
+python-versions = "<4.0,>=3.8"
+groups = ["main"]
+files = [
+    {file = "flask_htmx-0.4.0-py3-none-any.whl", hash = "sha256:ac0ef976638bc635537a47c4ae622c91aef1e69d8bf52880aa9ae0db089ce7d2"},
+    {file = "flask_htmx-0.4.0.tar.gz", hash = "sha256:2d367fb27c8da99d031a0c566b7e562637139722e2d4e8ec67c7f941addb22fd"},
+]
+
+[package.dependencies]
+Flask = ">=2.0.2,<4.0.0"
+
+[[package]]
 name = "flask-login"
 version = "0.6.3"
 description = "User authentication and session management for Flask."
@@ -518,5 +533,5 @@ email = ["email-validator"]
 
 [metadata]
 lock-version = "2.1"
-python-versions = ">=3.12"
-content-hash = "b8594fb65d9c4f9e5699e13b78e8ce064af8d9dea69e8df863db014fc43df099"
+python-versions = ">=3.13,<4.0"
+content-hash = "21e9ae27d4b1185710b9af9a3bda059d985986373f914b1d76458333941b29e9"
