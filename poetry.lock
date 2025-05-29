@@ -285,6 +285,26 @@ MarkupSafe = ">=2.0"
 i18n = ["Babel (>=2.7)"]
 
 [[package]]
+name = "jinja2-fragments"
+version = "1.9.0"
+description = "Render Jinja2 template block as HTML page fragments on Python web frameworks."
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+files = [
+    {file = "jinja2_fragments-1.9.0-py3-none-any.whl", hash = "sha256:69b91e7e2f325ea7e391e36a9abcc572db967e2bf3afd35f74fcb78fc9f8c6c5"},
+    {file = "jinja2_fragments-1.9.0.tar.gz", hash = "sha256:d903fe5781da1c1867f5fa6a53c5b58fabe7bd2a2721618db48ecba2974d2429"},
+]
+
+[package.dependencies]
+jinja2 = ">=3.1.0,<4.0.0"
+
+[package.extras]
+dev = ["pre-commit"]
+docs = ["sphinx (>=7.0.0)", "sphinx-autodoc-typehints (>=1.25.0)", "sphinx-rtd-theme (>=2.0.0)"]
+tests = ["fastapi (>=0.108.0)", "flask (>=2.1.0)", "litestar[standard]", "pytest", "pytest_asyncio", "quart (>=0.18.0)", "sanic", "sanic_ext", "sanic_testing", "starlette[full] (>=0.29.0)"]
+
+[[package]]
 name = "markupsafe"
 version = "3.0.2"
 description = "Safely add untrusted strings to HTML/XML markup."
@@ -535,4 +555,4 @@ email = ["email-validator"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13,<4.0"
-content-hash = "21e9ae27d4b1185710b9af9a3bda059d985986373f914b1d76458333941b29e9"
+content-hash = "b60afd3327a1ff096ff38f5d9da057e1e16ad22d061a58a82c61864fbdde6ce4"
