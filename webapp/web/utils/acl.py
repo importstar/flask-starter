@@ -1,5 +1,7 @@
 from flask import abort, Flask, request, redirect, url_for
 from flask_login import current_user, LoginManager, login_url
+from werkzeug.exceptions import Forbidden, Unauthorized
+
 from functools import wraps
 from ...models.user_model import User
 
@@ -10,32 +12,36 @@ def init_acl(app: Flask):
     login_manager.init_app(app)
 
 
-def roles_required(required_roles: list[str]):
+def roles_required(roles: list[str]):
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
             if not current_user or not current_user.is_authenticated:
-                abort(401)  # Unauthorized
-            if current_user.role in required_roles:
-                return func(*args, **kwargs)
-            else:
-                abort(403)  # Forbidden
+                raise Unauthorized()
+
+            for role in roles:
+                if role in current_user.roles:
+                    return func(*args, **kwargs)
+
+            raise Forbidden()
 
         return wrapper
 
     return decorator
 
 
-def permissions_required(permission: list[str]):
+def permissions_required(permissions: list[str]):
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
             if not current_user or not current_user.is_authenticated:
-                abort(401)  # Unauthorized
-            if current_user.has_permission(permission):
-                return func(*args, **kwargs)
-            else:
-                abort(403)
+                raise Unauthorized()
+
+            for permission in permissions:
+                if not current_user.has_permission(permission):
+                    return func(*args, **kwargs)
+
+            raise Forbidden()
 
         return wrapper
 
