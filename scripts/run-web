@@ -2,4 +2,4 @@
 
 # Activate the virtual environment
 # source ./venv/bin/activate
-APP_SETTINGS=$(pwd)/.env poetry run run-web -d
+APP_SETTINGS=$(pwd)/.env poetry run webapp -d

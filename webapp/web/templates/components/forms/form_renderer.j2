@@ -1,5 +1,5 @@
-{% import "components/forms/text_input.html" as text_input %}
-{% import "components/forms/date_picker.html" as date_picker %}
+{% import "components/forms/text_input.j2" as text_input %}
+{% import "components/forms/date_picker.j2" as date_picker %}
 
 {% macro render_text_input(form) %}
 {{ text_input.text_input(form, **kwargs) }}
